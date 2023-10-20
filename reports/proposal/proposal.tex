@@ -1,0 +1,124 @@
+%%%%%%%% ICML 2019 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2019} with \usepackage[nohyperref]{icml2019} above.
+\usepackage{hyperref}
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+%\usepackage{icml2019}
+
+% If accepted, instead use the following line for the camera-ready submission:
+\usepackage[accepted]{icml2019}
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{COSE474-2023F: Final Project Proposal}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{COSE474-2021F: Final Project Proposal \\
+           Machine Generated Journalism Detection Using Deep Learning}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2019
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+\icmlauthor{Minseo Kim}{}
+\end{icmlauthorlist}
+
+%\icmlaffiliation{ku}{Department of Computer Science \& Engineering, Korea University, Seoul, Korea}
+
+
+%\icmlcorrespondingauthor{the}{myemail@korea.ac.kr}
+%\icmlcorrespondingauthor{Eee Pppp}{ep@eden.co.uk}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{Machine Learning, ICML}
+
+\vskip 0.3in
+]
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+%\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+%\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+
+%\begin{abstract}
+%This document provides a basic paper template and submission guidelines.
+%Abstracts must be a single paragraph, ideally between 4--6 sentences long.
+%Gross violations will trigger corrections at the camera-ready phase.
+%\end{abstract}
+
+\section{Introduction}
+With the advent of generative large language models it has become easier to generate journalism with little human intervention.
+However, this could potentially be dangerous for numerous reasons, such as plagiarism, proliferation of misinformation, and misuse.
+The purpose of this work is to train a model capable of distinguishing human written journalism from machine generated journalism with transformer based architecture.
+In particular, this project will focus on jounalism in Korean, where the topic is relatively less explored.
+
+\section{Problem definition \& challenges}
+The primary goal of this work will be distinguishing human written news and machine generated news written in Korean.
+In order to achieve this, a transformer based model will be fine tuned from existing, reliable large language models.
+Additionally, to ensure the model is robust, the model will be trained on a dataset consisting of human written news and corresponding machine generated news, generated from the human written news dataset. \\
+
+\section{Related Works }
+While there are few studies on detecting machine generated Korean journalism, similar attempts have been made by numerous researchers to detect AI generated content in general.
+Recent works such as RADAR (Hu et al., 2023) and DetectGPT (Mitchell et al., 2023) have attempted to distinguish human and machine generated text,
+where the former in particular utilized an adversarial model with human generated text along with machine generated text generated and paraphrased from the human written text.
+However, neither of these works are trained on Korean corpora.
+
+\section{Datasets}
+The model will be trained on a corpus consisting of publicly available news articles from numerous Korean news outlets,
+and corresponding machine generated news articles of the same topic from various large language models capable of text to text generation, such as GPT, and LLaMA.
+The goal is to have a machine generated news article for each human written article in the training dataset.
+
+\section{State-of-the-art methods and baselines}
+While there are no comparable models for machine generated Korean news article detection, works such as RADAR and DetectGPT were able to achieve AUROC scores of up to 0.95 and 0.98, respectively in AI generated text in general.\\
+Other generic text classification models, such as KR-FinBert-SC (Kim, et al., 2022) were able to achieve similar metrics for other datasets of different domain.
+
+\section{Schedule}
+\textasciitilde{} 2023-11-15 : Determine base model, set up environment\\
+\textasciitilde{} 2023-11-30 : Acquire dataset\\
+\textasciitilde{} 2023-12-15 : Train and evaluate model
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+Hu, X., Chen, P. Y., \& Ho, T. Y. (2023). RADAR: Robust AI-Text Detection via Adversarial Learning. arXiv preprint arXiv:2307.03838.
+
+Mitchell, E., Lee, Y., Khazatsky, A., Manning, C. D., \& Finn, C. (2023). Detectgpt: Zero-shot machine-generated text detection using probability curvature. arXiv preprint arXiv:2301.11305.
+
+kr-FinBert-SC, Kim, Eunhee and Hyopil Shin (2022). KR-FinBert: Fine-tuning KR-FinBert for Sentiment Analysis. huggingface \url{https://huggingface.co/snunlp/KR-FinBert-SC}
+\end{document}
