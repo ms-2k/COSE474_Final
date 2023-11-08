@@ -1,0 +1,20 @@
+todo:
+    test more models
+    finish up web scraper
+    integrate paraphraser with web scraper
+    begin writing report
+
+data collection plan:
+    acquire article
+    create thread and launch python instance
+    load a model into python instance
+    send article to python instance
+    paraphrase it with selected model
+    await response from worker thread
+    main thread acquires another article in the meantime
+
+T5 is not very good at paraphrasing korean
+    fine tune maybe?
+    ^will be a whole project on its own
+realistically trying other models will work better
+tons of models already fine tuned to KR corpus on hugging face
