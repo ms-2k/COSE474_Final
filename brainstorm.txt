@@ -15,6 +15,15 @@ data collection plan:
 
 T5 is not very good at paraphrasing korean
     fine tune maybe?
-    ^will be a whole project on its own
-realistically trying other models will work better
-tons of models already fine tuned to KR corpus on hugging face
+        this will be a whole project on its own
+    realistically trying other models will work better
+    tons of models already fine tuned to KR corpus on hugging face
+
+openchat is pretty amazing despite not being fine tuned to korean
+    might be better to use its prebuit API server instead though
+    vanilla transformers is kinda laggy
+        10 whole minutes to paraphrase an article
+        maybe quantization issue?
+        loading in 4bit causes issues
+    could just make the scraper make API calls to local openchat client
+    maybe extend it to make API calls to ChatGPT as well
