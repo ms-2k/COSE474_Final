@@ -27,3 +27,11 @@ openchat is pretty amazing despite not being fine tuned to korean
         loading in 4bit causes issues
     could just make the scraper make API calls to local openchat client
     maybe extend it to make API calls to ChatGPT as well
+
+revised plan:
+    instead of instantiating python instances from web scraper
+    run models on a flask web api server
+    do api calls to paraphraser models
+    use existing apis for openchat and other models that provide them (maybe chatgpt too?)
+
+may need to figure out how streamer works
