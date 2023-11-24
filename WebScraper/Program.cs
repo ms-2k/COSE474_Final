@@ -1,19 +1,20 @@
 ﻿using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using HtmlAgilityPack;
 
 namespace WebScraper;
 
 public partial class Program
 {
-    private static readonly Uri LlmServer = new("http://localhost:18888/v1/chat/completions");
+    private static readonly Uri LlmServer = new("http://localhost:5000/v1/completions");
+    private static readonly MediaTypeHeaderValue headerType = new("application/json");
 
     public static void Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
 
         string url = $"https://n.news.naver.com/article/055/0001108114";
-
         Task.Run(async () =>
         {
             var doc = await new HtmlWeb().LoadFromWebAsync(url);
@@ -25,23 +26,44 @@ public partial class Program
             {
                 Method = HttpMethod.Post,
                 RequestUri = LlmServer,
-                Content = new StringContent(GeneratePrompt("todo"))
+                Content = new StringContent(
+                    GeneratePrompt("Generate a cake recipe:", 500),
+                    headerType
+                )
             };
-
-            request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             HttpResponseMessage response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
-            string llmOutput = await response.Content.ReadAsStringAsync();
+            var llmOutput = await JsonSerializer.DeserializeAsync<JsonElement>(await response.Content.ReadAsStreamAsync());
 
-            Console.WriteLine(llmOutput);
+            Console.WriteLine(llmOutput.ToString());
         }).Wait();
     }
 
-    public static string GeneratePrompt(string text)
+    /// <summary>
+    /// Generates an OpenAI API compatible prompt from given text.
+    /// </summary>
+    /// <param name="text">LLM instruction prompt.</param>
+    /// <param name="maxTokens">Maximum number of tokens to generate.</param>
+    /// <param name="temperature">Generation temperature</param>
+    /// <param name="topP">Generation top_p.</param>
+    /// <returns></returns>
+    public static string GeneratePrompt(string text, int maxTokens = 0, float temperature = 0.7f, float topP = 0.8f)
     {
-        return "todo";
+        return string.Concat(
+            "{\n\t\"prompt\": \"",
+            text,
+            "\",\n\t\"max_tokens\": ",
+            maxTokens > 0? maxTokens : text.Length,
+            ",\n\t\"temperature\": ",
+            temperature,
+            ",\n\t\"top_p\": ",
+            topP,
+            ",\n\t\"seed\": ",
+            DateTime.Now.Ticks,
+            "\n}"
+        );
     }
 
     /// <summary>
