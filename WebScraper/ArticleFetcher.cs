@@ -1,9 +1,10 @@
 ﻿using HtmlAgilityPack;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace WebScraper
 {
-    public class ArticleFetcher
+    public partial class ArticleFetcher
     {
         //dictionary of press id and last article id
         private readonly Dictionary<int, int> articleKeys;
@@ -11,6 +12,10 @@ namespace WebScraper
 
         //path to article list root directory
         private readonly DirectoryInfo projectPath;
+
+        //matches special HT
+        [GeneratedRegex(@"\&\w{2,10}\;")]
+        private static partial Regex SpecialCharMatch();
 
         //primary constructor
         public ArticleFetcher(DirectoryInfo projectPath)
@@ -31,7 +36,11 @@ namespace WebScraper
             int aid = articleKeys[oid]--;
 
             //acquire article
-            var doc = await new HtmlWeb().LoadFromWebAsync(AcquireArticleURL(oid, aid));
+            var doc = await new HtmlWeb()
+            {
+                AutoDetectEncoding = false,
+                OverrideEncoding = Encoding.GetEncoding(949)
+            }.LoadFromWebAsync(AcquireArticleURL(oid, aid));
 
             //acquire just the article body
             return StripHtml(doc.DocumentNode.SelectSingleNode($"//*[@id=\"dic_area\"]"));
@@ -83,6 +92,27 @@ namespace WebScraper
 
         /// <summary>
         /// Saves current article IDs.
+        /// </summary>
+        /// <param name="savePath">full path to where last article ID data should be stored</param>
+        /// <returns></returns>
+        public void SaveLast()
+        {
+            //create new file 
+            using FileStream fs = new(
+                Path.Join(projectPath.FullName, "articles", string.Join('.', DateTime.Now.ToString("yyyyMMddHHss.fffffff"), "csv"))
+                , FileMode.Create, FileAccess.Write, FileShare.Read
+            );
+
+            //create stream writer over filestream
+            using StreamWriter sw = new(fs);
+
+            //write each press id and article id pairs to file
+            foreach (var oid in oids)
+                sw.WriteLine($"{oid:D3}, {articleKeys[oid]:D10}");
+        }
+
+        /// <summary>
+        /// Saves current article IDs asynchronously.
         /// </summary>
         /// <param name="savePath">full path to where last article ID data should be stored</param>
         /// <returns></returns>
@@ -145,7 +175,10 @@ namespace WebScraper
             }
 
             //trim and return stripped document
-            return sb.ToString().Replace("\n\n", "\n").Trim();
+            return SpecialCharMatch().Replace(
+                sb.ToString().Replace("\n\n", "\n").Trim(),
+                string.Empty
+            );
         }
     }
 }
