@@ -42,8 +42,15 @@ namespace WebScraper
         /// </summary>
         public async Task InitializeAsync()
         {
+            //clear stored data (if any)
+            articleKeys.Clear();
+            oids.Clear();
+
             //acquire file stream and read as string
-            using FileStream fs = new(projectPath.FullName + "\\articles.csv", FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            using FileStream fs = new(
+                Path.Join(projectPath.FullName, "articles", "base.csv"),
+                FileMode.Open, FileAccess.Read, FileShare.ReadWrite
+            );
             using StreamReader sr = new(fs);
 
             //temp variable to store each line
@@ -72,6 +79,27 @@ namespace WebScraper
             }
 
             oids.AddRange(articleKeys.Keys);
+        }
+
+        /// <summary>
+        /// Saves current article IDs.
+        /// </summary>
+        /// <param name="savePath">full path to where last article ID data should be stored</param>
+        /// <returns></returns>
+        public async Task SaveLastAsync()
+        {
+            //create new file 
+            using FileStream fs = new(
+                Path.Join(projectPath.FullName, "articles", string.Join('.', DateTime.Now.ToString("yyyyMMddHHss.fffffff"), "csv"))
+                ,FileMode.Create, FileAccess.Write, FileShare.Read
+            );
+
+            //create stream writer over filestream
+            using StreamWriter sw = new(fs);
+
+            //write each press id and article id pairs to file
+            foreach (var oid in oids)
+                await sw.WriteLineAsync($"{oid:D3}, {articleKeys[oid]:D10}");
         }
 
         /// <summary>

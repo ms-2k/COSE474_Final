@@ -20,44 +20,23 @@ public partial class Program
     //cache http client
     private static readonly HttpClient client = new();
 
+    //article fetcher object to use
+    private static readonly ArticleFetcher articles = new(projectPath);
+
     public static void Main(string[] args)
     {
-
         Console.OutputEncoding = Encoding.UTF8;
 
-        Task.Run(async () =>
-        {
-            ArticleFetcher articles = new(projectPath);
-            await articles.InitializeAsync();
+        Task.Run(Paraphraser).Wait();
 
-            Console.Write(await articles.AcquireRandomArticle());
-        }).Wait();
-        /*
-        Task.Run(async () =>
-        {
-            var doc = await new HtmlWeb().LoadFromWebAsync(url);
+        Task.Run(articles.SaveLastAsync).Wait();
+    }
 
-            string str = StripHtml(doc.DocumentNode.SelectSingleNode($"//*[@id=\"dic_area\"]"));
+    public static async Task Paraphraser()
+    {
+        await articles.InitializeAsync();
 
-            using HttpClient client = new();
-            HttpRequestMessage request = new()
-            {
-                Method = HttpMethod.Post,
-                RequestUri = LlmServer,
-                Content = new StringContent(
-                    GeneratePrompt("Generate a cake recipe:", 500),
-                    headerType
-                )
-            };
-
-            HttpResponseMessage response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            var llmOutput = await JsonSerializer.DeserializeAsync<JsonElement>(await response.Content.ReadAsStreamAsync());
-
-            Console.WriteLine(llmOutput.ToString());
-        }).Wait();
-        */
+        //Console.Write(await articles.AcquireRandomArticle());
     }
 
     /// <summary>
