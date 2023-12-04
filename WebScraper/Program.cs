@@ -25,20 +25,6 @@ public partial class Program
         Task.Run(ParaphraserLoop).Wait();
     }
 
-    private sealed record ArticlePair
-    {
-        public string ID { get; set; }
-        public string Original { get; set; }
-        public string Paraphrased { get; set; }
-
-        public ArticlePair((string original, string id) articleTuple)
-        {
-            ID = articleTuple.id;
-            Original = articleTuple.original;
-            Paraphrased = string.Empty;
-        }
-    }
-
     /// <summary>
     /// Continuously acquires random articles and sends a paraphrase request to LLM API
     /// </summary>
@@ -79,20 +65,20 @@ public partial class Program
 
                 //acquire paraphrased article (not enough computing power to request multiple choices :c)
                 article.Paraphrased = json.choices[0].text;
-                article.Paraphrased = article.Paraphrased.Trim().Replace("\n", "\\n");
+                article.Paraphrased = article.Paraphrased.Trim();
+
+                //skip if response is empty
+                if (article.Paraphrased.Length < 5)
+                    throw new InvalidResponseException("Empty LLM response!");
+
+                await logger.WriteLineAsync(article.ID);
+                await DumpArticle(article);
             }
 
             //log exception if it happens
             catch (Exception ex)
             {
                 await logger.WriteLineAsync(ex.Message);
-            }
-
-            //save article as json
-            finally
-            {
-                await logger.WriteLineAsync(article.ID);
-                await DumpArticle(article);
             }
         }
     }
@@ -124,4 +110,31 @@ public partial class Program
     {
         articles.SaveLast();
     }
+}
+
+/// <summary>
+/// Article pair object for storage
+/// </summary>
+public class ArticlePair
+{
+    public string ID { get; set; }
+    public string Original { get; set; }
+    public string Paraphrased { get; set; }
+
+    public ArticlePair((string original, string id) articleTuple)
+    {
+        ID = articleTuple.id;
+        Original = articleTuple.original;
+        Paraphrased = string.Empty;
+    }
+}
+
+/// <summary>
+/// Invalid API response exception
+/// </summary>
+public class InvalidResponseException : Exception
+{
+    public InvalidResponseException() { }
+    public InvalidResponseException(string message) : base(message) { }
+    public InvalidResponseException(string message, Exception inner) : base(message, inner) { }
 }
