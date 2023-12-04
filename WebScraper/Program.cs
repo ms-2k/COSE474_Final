@@ -35,7 +35,7 @@ public partial class Program
 
         using FileStream logFile = new(
             Path.Join(projectPath.FullName, "log.txt"),
-            FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read
+            FileMode.Append, FileAccess.Write, FileShare.Read
         );
         using StreamWriter logger = new(logFile);
 
@@ -44,12 +44,16 @@ public partial class Program
         //loop forever (until interrupt)
         while (true)
         {
-            //acquire random article
-            article = new(await articles.AcquireRandomArticle());
-
             //attempt to acquire paraphrased article
             try
             {
+                //acquire random article
+                article = new(await articles.AcquireRandomArticle());
+
+                //skip if article body is empty
+                if (article.Original.Length < 5)
+                    throw new InvalidResponseException("Invalid article length!");
+
                 //log current time
                 await logger.WriteAsync($"[{DateTime.Now:u}] ");
 

@@ -573,3 +573,6 @@ FodyWeavers.xsd
 
 #conda environment
 .conda
+
+#dataset
+data/

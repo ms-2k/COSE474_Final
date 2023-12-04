@@ -58,9 +58,17 @@ namespace WebScraper
             articleKeys.Clear();
             oids.Clear();
 
+            //acquire article list directory
+            var articleDir = new DirectoryInfo(Path.Join(projectPath.FullName, "articles"));
+
+            //acquire last accessed article list
+            var articleList = (from f in articleDir.GetFiles()
+                               orderby f.LastWriteTime descending
+                               select f).First();
+
             //acquire file stream and read as string
             using FileStream fs = new(
-                Path.Join(projectPath.FullName, "articles", "base.csv"),
+                Path.Join(articleList.FullName),
                 FileMode.Open, FileAccess.Read, FileShare.ReadWrite
             );
             using StreamReader sr = new(fs);
