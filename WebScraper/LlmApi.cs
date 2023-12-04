@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 
 namespace WebScraper
 {
@@ -9,7 +8,10 @@ namespace WebScraper
         public static readonly MediaTypeHeaderValue headerType = new("application/json");
 
         //cache http client
-        public static readonly HttpClient client = new();
+        public static readonly HttpClient client = new()
+        {
+            Timeout = TimeSpan.FromSeconds(300)
+        };
 
         /// <summary>
         /// Performs API call to LLM server with given parameters

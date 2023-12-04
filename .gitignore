@@ -192,6 +192,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+!/WebScraper/logs
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
