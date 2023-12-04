@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace WebScraper;
 
@@ -22,6 +24,11 @@ public partial class Program
         Console.OutputEncoding = Encoding.Unicode;
         Console.CancelKeyPress += new ConsoleCancelEventHandler(KeyboardInterruptHander);
 
+        //create logger
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.File(Path.Join(projectPath.FullName, "logs", "log.txt"), rollingInterval: RollingInterval.Day)
+            .CreateLogger();
+
         Task.Run(ParaphraserLoop).Wait();
     }
 
@@ -32,12 +39,6 @@ public partial class Program
     {
         //initialize article fetcher
         await articles.InitializeAsync();
-
-        using FileStream logFile = new(
-            Path.Join(projectPath.FullName, "log.txt"),
-            FileMode.Append, FileAccess.Write, FileShare.Read
-        );
-        using StreamWriter logger = new(logFile);
 
         ArticlePair article;
 
@@ -53,9 +54,6 @@ public partial class Program
                 //skip if article body is empty
                 if (article.Original.Length < 5)
                     throw new InvalidResponseException("Invalid article length!");
-
-                //log current time
-                await logger.WriteAsync($"[{DateTime.Now:u}] ");
 
                 //parse article json, extract article body
                 dynamic json = JObject.Parse(
@@ -75,14 +73,18 @@ public partial class Program
                 if (article.Paraphrased.Length < 5)
                     throw new InvalidResponseException("Empty LLM response!");
 
-                await logger.WriteLineAsync(article.ID);
+                //filter out LLM responses that translate the article (happens every now and then for some reason)
+                if (Alphabets().Matches(article.Paraphrased).Count > article.Paraphrased.Length / 3.0)
+                    throw new InvalidResponseException("Bad LLM response");
+
+                Log.Information($"Paraphrased: {article.ID}");
                 await DumpArticle(article);
             }
 
             //log exception if it happens
             catch (Exception ex)
             {
-                await logger.WriteLineAsync(ex.Message);
+                Log.Information($"Exception:\n{ex.Message}");
             }
         }
     }
@@ -114,6 +116,10 @@ public partial class Program
     {
         articles.SaveLast();
     }
+
+    //English alphabet
+    [GeneratedRegex(@"[a-zA-Z]")]
+    private static partial Regex Alphabets();
 }
 
 /// <summary>

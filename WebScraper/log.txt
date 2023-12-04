@@ -1,0 +1,109 @@
+[2023-12-04 14:44:42Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:44:45Z] https://n.news.naver.com/article/421/0007200589
+[2023-12-04 14:45:00Z] https://n.news.naver.com/article/001/0014356696
+[2023-12-04 14:45:08Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:45:08Z] https://n.news.naver.com/article/022/0003879096
+[2023-12-04 14:45:37Z] https://n.news.naver.com/article/374/0000360359
+[2023-12-04 14:45:56Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:45:56Z] https://n.news.naver.com/article/374/0000360358
+[2023-12-04 14:46:21Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+Invalid article length!
+[2023-12-04 14:46:21Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:46:22Z] https://n.news.naver.com/article/025/0003324406
+[2023-12-04 14:47:29Z] The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.
+[2023-12-04 14:49:09Z] https://n.news.naver.com/article/449/0000262514
+[2023-12-04 14:50:26Z] https://n.news.naver.com/article/374/0000360357
+[2023-12-04 14:50:49Z] https://n.news.naver.com/article/374/0000360356
+[2023-12-04 14:52:00Z] https://n.news.naver.com/article/032/0003263764
+[2023-12-04 14:52:28Z] https://n.news.naver.com/article/032/0003263763
+Object reference not set to an instance of an object.
+[2023-12-04 14:53:41Z] https://n.news.naver.com/article/028/0002666273
+[2023-12-04 14:54:00Z] https://n.news.naver.com/article/052/0001965247
+[2023-12-04 14:54:30Z] https://n.news.naver.com/article/055/0001109418
+[2023-12-04 14:54:47Z] https://n.news.naver.com/article/449/0000262513
+[2023-12-04 14:55:10Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:55:11Z] https://n.news.naver.com/article/023/0003801555
+[2023-12-04 14:55:45Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:55:45Z] https://n.news.naver.com/article/469/0000772332
+[2023-12-04 14:56:07Z] https://n.news.naver.com/article/052/0001965246
+[2023-12-04 14:56:22Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:56:23Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:56:23Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:56:23Z] https://n.news.naver.com/article/448/0000437819
+[2023-12-04 14:56:58Z] The request was canceled due to the configured HttpClient.Timeout of 100 seconds elapsing.
+[2023-12-04 14:58:38Z] https://n.news.naver.com/article/056/0011610249
+[2023-12-04 14:59:10Z] https://n.news.naver.com/article/081/0003411916
+[2023-12-04 14:59:40Z] https://n.news.naver.com/article/001/0014356695
+[2023-12-04 14:59:47Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 14:59:47Z] https://n.news.naver.com/article/005/0001655145
+Object reference not set to an instance of an object.
+[2023-12-04 15:00:27Z] https://n.news.naver.com/article/052/0001965244
+[2023-12-04 15:00:52Z] https://n.news.naver.com/article/057/0001783333
+[2023-12-04 15:01:06Z] https://n.news.naver.com/article/449/0000262512
+[2023-12-04 15:02:27Z] https://n.news.naver.com/article/028/0002666271
+[2023-12-04 15:02:43Z] https://n.news.naver.com/article/032/0003263762
+[2023-12-04 15:02:55Z] https://n.news.naver.com/article/421/0007200588
+[2023-12-04 15:03:06Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:03:07Z] https://n.news.naver.com/article/005/0001655144
+[2023-12-04 15:03:14Z] https://n.news.naver.com/article/056/0011610248
+[2023-12-04 15:03:45Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:03:45Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:03:45Z] https://n.news.naver.com/article/021/0002607439
+[2023-12-04 15:04:12Z] https://n.news.naver.com/article/214/0001314669
+[2023-12-04 15:04:38Z] https://n.news.naver.com/article/421/0007200586
+[2023-12-04 15:04:50Z] https://n.news.naver.com/article/055/0001109417
+Object reference not set to an instance of an object.
+[2023-12-04 15:05:13Z] https://n.news.naver.com/article/056/0011610247
+[2023-12-04 15:05:29Z] https://n.news.naver.com/article/022/0003879095
+Invalid article length!
+[2023-12-04 15:06:36Z] https://n.news.naver.com/article/056/0011610246
+[2023-12-04 15:06:46Z] https://n.news.naver.com/article/020/0003533630
+[2023-12-04 15:07:26Z] https://n.news.naver.com/article/374/0000360355
+[2023-12-04 15:07:49Z] https://n.news.naver.com/article/022/0003879094
+[2023-12-04 15:08:29Z] https://n.news.naver.com/article/214/0001314668
+[2023-12-04 15:08:43Z] https://n.news.naver.com/article/001/0014356694
+[2023-12-04 15:08:50Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:08:50Z] https://n.news.naver.com/article/056/0011610245
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+[2023-12-04 15:09:05Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+[2023-12-04 15:09:08Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:09:08Z] https://n.news.naver.com/article/001/0014356692
+[2023-12-04 15:09:16Z] https://n.news.naver.com/article/448/0000437818
+[2023-12-04 15:09:40Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:09:41Z] https://n.news.naver.com/article/022/0003879093
+[2023-12-04 15:10:18Z] https://n.news.naver.com/article/052/0001965242
+[2023-12-04 15:10:58Z] https://n.news.naver.com/article/081/0003411915
+Object reference not set to an instance of an object.
+[2023-12-04 15:11:19Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:11:19Z] https://n.news.naver.com/article/032/0003263761
+[2023-12-04 15:12:01Z] https://n.news.naver.com/article/448/0000437817
+[2023-12-04 15:12:34Z] https://n.news.naver.com/article/055/0001109415
+[2023-12-04 15:12:57Z] https://n.news.naver.com/article/449/0000262511
+Object reference not set to an instance of an object.
+Object reference not set to an instance of an object.
+[2023-12-04 15:13:53Z] https://n.news.naver.com/article/005/0001655142
+[2023-12-04 15:14:48Z] https://n.news.naver.com/article/025/0003324403
+[2023-12-04 15:15:37Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:15:37Z] https://n.news.naver.com/article/081/0003411914
+[2023-12-04 15:16:24Z] Empty LLM response!
+[2023-12-04 15:17:00Z] https://n.news.naver.com/article/374/0000360354
+[2023-12-04 15:17:35Z] https://n.news.naver.com/article/001/0014356691
+[2023-12-04 15:17:43Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:17:43Z] https://n.news.naver.com/article/374/0000360353
+[2023-12-04 15:18:10Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+Invalid article length!
+[2023-12-04 15:18:11Z] https://n.news.naver.com/article/023/0003801554
+[2023-12-04 15:18:41Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+[2023-12-04 15:18:42Z] Response status code does not indicate success: 422 (Unprocessable Entity).
+Object reference not set to an instance of an object.
+[2023-12-04 15:18:43Z] https://n.news.naver.com/article/055/0001109414
+[2023-12-04 15:19:07Z] https://n.news.naver.com/article/003/0012233512
+[2023-12-04 15:20:18Z] https://n.news.naver.com/article/023/0003801553
