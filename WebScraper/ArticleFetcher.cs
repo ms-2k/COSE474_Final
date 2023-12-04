@@ -29,21 +29,24 @@ namespace WebScraper
         /// Acquire a random article
         /// </summary>
         /// <returns><see cref="string"></see> representation of an article body</returns>
-        public async Task<string> AcquireRandomArticle()
+        public async Task<(string Article, string Url)> AcquireRandomArticle()
         {
             //acquire random oid
             var oid = oids[new Random().Next(0, oids.Count)];
             int aid = articleKeys[oid]--;
+
+            //acquire article url
+            string articleUrl = AcquireArticleURL(oid, aid);
 
             //acquire article
             var doc = await new HtmlWeb()
             {
                 AutoDetectEncoding = false,
                 OverrideEncoding = Encoding.GetEncoding(949)
-            }.LoadFromWebAsync(AcquireArticleURL(oid, aid));
+            }.LoadFromWebAsync(articleUrl);
 
             //acquire just the article body
-            return StripHtml(doc.DocumentNode.SelectSingleNode($"//*[@id=\"dic_area\"]"));
+            return (StripHtml(doc.DocumentNode.SelectSingleNode($"//*[@id=\"dic_area\"]")), articleUrl);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 
 namespace WebScraper;
@@ -21,28 +22,21 @@ public partial class Program
         Console.OutputEncoding = Encoding.Unicode;
         Console.CancelKeyPress += new ConsoleCancelEventHandler(KeyboardInterruptHander);
 
-        //begin running paraphraser loop
-        //Task.Run(ParaphraserLoop).Wait();
+        Task.Run(ParaphraserLoop).Wait();
+    }
 
-        Task.Run(async () =>
+    private sealed record ArticlePair
+    {
+        public string ID { get; set; }
+        public string Original { get; set; }
+        public string Paraphrased { get; set; }
+
+        public ArticlePair((string original, string id) articleTuple)
         {
-            //initialize article fetcher
-            await articles.InitializeAsync();
-
-            //temp variable for original article
-            string article = await articles.AcquireRandomArticle();
-
-            Console.Write("original:\n" + article);
-
-            dynamic json = JObject.Parse(
-                await LlmApiRequest(
-                    $"Paraphrase the following article in Korean in a journalist style. No paraphrased sentence should exactly match the given text. Do not translate the article.\\n\\nText:\\n{article.Replace("\n", "\\n")}\\n\\nParaphrased article in Korean:\\n",
-                    (int)(article.Length * 1.1)
-                )
-            );
-
-            Console.WriteLine("\n\nparaphrased:\n" + json.choices[0].text);
-        }).Wait();
+            ID = articleTuple.id;
+            Original = articleTuple.original;
+            Paraphrased = string.Empty;
+        }
     }
 
     /// <summary>
@@ -53,18 +47,74 @@ public partial class Program
         //initialize article fetcher
         await articles.InitializeAsync();
 
-        //temp variable for original article
-        string article;
+        using FileStream logFile = new(
+            Path.Join(projectPath.FullName, "log.txt"),
+            FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read
+        );
+        using StreamWriter logger = new(logFile);
+
+        ArticlePair article;
 
         //loop forever (until interrupt)
         while (true)
         {
             //acquire random article
-            article = await articles.AcquireRandomArticle();
+            article = new(await articles.AcquireRandomArticle());
 
-            await LlmApiRequest(GeneratePrompt(article + "\nParaphrase the above article in Korean."));
+            //attempt to acquire paraphrased article
+            try
+            {
+                //log current time
+                await logger.WriteAsync($"[{DateTime.Now:u}] ");
+
+                //parse article json, extract article body
+                dynamic json = JObject.Parse(
+
+                    //send API request to LLM
+                    await LlmApiRequest(
+                        $"Paraphrase the following article in Korean in a journalist style. No paraphrased sentence should exactly match the given text. Do not translate the article.\\n\\nText:\\n{article.Original.Replace("\n", "\\n")}\\n\\nParaphrased article in Korean:\\n",
+                        (int)(article.Original.Length * 1.1)
+                    )
+                );
+
+                //acquire paraphrased article (not enough computing power to request multiple choices :c)
+                article.Paraphrased = json.choices[0].text;
+                article.Paraphrased = article.Paraphrased.Trim().Replace("\n", "\\n");
+            }
+
+            //log exception if it happens
+            catch (Exception ex)
+            {
+                await logger.WriteLineAsync(ex.Message);
+            }
+
+            //save article as json
+            finally
+            {
+                await logger.WriteLineAsync(article.ID);
+                await DumpArticle(article);
+            }
         }
+    }
 
+    /// <summary>
+    /// Save article as JSON
+    /// </summary>
+    /// <param name="article">Article pair containing the original, and paraphrased articles</param>
+    /// <returns></returns>
+    private static async Task DumpArticle(ArticlePair article)
+    {
+        //open filestream and create new json file
+        using FileStream fs = new(
+            Path.Join(projectPath.FullName, "..", "data", $"{DateTime.Now:yyyyMMddHHss.fffffff}.json"),
+            FileMode.Create, FileAccess.ReadWrite, FileShare.Read
+        );
+
+        //create streamwriter over filestream
+        using StreamWriter writer = new(fs, Encoding.UTF8);
+
+        //serialize articlepair record and write to file
+        await writer.WriteAsync(JsonConvert.SerializeObject(article, Formatting.Indented));
     }
 
     /// <summary>
