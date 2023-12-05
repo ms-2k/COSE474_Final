@@ -1,0 +1,40 @@
+2023-12-06 00:01:16.910 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/020/0003533465
+2023-12-06 00:01:49.405 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/028/0002666099
+2023-12-06 00:04:02.593 +09:00 [INF] Exception:
+Bad LLM response
+2023-12-06 00:04:34.389 +09:00 [INF] Exception:
+Bad LLM response
+2023-12-06 00:04:40.056 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/001/0014356500
+2023-12-06 00:04:40.568 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:04:40.887 +09:00 [INF] Exception:
+Object reference not set to an instance of an object.
+2023-12-06 00:04:41.325 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:05:25.917 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/374/0000360192
+2023-12-06 00:05:39.168 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/052/0001965061
+2023-12-06 00:05:59.562 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/003/0012233337
+2023-12-06 00:06:08.446 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/005/0001654969
+2023-12-06 00:06:49.916 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/449/0000262337
+2023-12-06 00:07:43.967 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/023/0003801391
+2023-12-06 00:08:00.051 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/025/0003324236
+2023-12-06 00:10:04.082 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/422/0000631295
+2023-12-06 00:10:04.426 +09:00 [INF] Exception:
+Object reference not set to an instance of an object.
+2023-12-06 00:10:04.554 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:11:13.859 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/081/0003411726
+2023-12-06 00:11:20.757 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/025/0003324235
+2023-12-06 00:11:21.044 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:12:08.567 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/449/0000262336
+2023-12-06 00:12:08.859 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:12:09.167 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:12:54.374 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/081/0003411725
+2023-12-06 00:13:33.626 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/028/0002666098
+2023-12-06 00:14:04.501 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/081/0003411724
+2023-12-06 00:14:04.714 +09:00 [INF] Exception:
+Response status code does not indicate success: 422 (Unprocessable Entity).
+2023-12-06 00:15:20.354 +09:00 [INF] Paraphrased: https://n.news.naver.com/article/028/0002666097
