@@ -35,3 +35,6 @@ revised plan:
     use existing apis for openchat and other models that provide them (maybe chatgpt too?)
 
 may need to figure out how streamer works
+
+hit 2000 articles after running the paraphraser for a day
+train classifier with 5000 articles?
