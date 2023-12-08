@@ -578,3 +578,6 @@ FodyWeavers.xsd
 #dataset
 data/
 /data.json
+
+#test models
+tests/output
