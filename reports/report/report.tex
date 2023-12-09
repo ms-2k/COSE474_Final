@@ -119,8 +119,8 @@ The intended model should possess the capability to analyze and interpret any gi
 This binary output, in the form of a label, will indicate whether the given article is a product of human intellect or a result of machine generation. \\
 \null\quad Despite the ambitious nature of this project, it is important to acknowledge the constraint of limited available computational resources.
 Therefore, to overcome this limitation and ensure efficient use of resources, the final model will not be built from scratch.
-Instead, we intend to fine-tune an existing model based on the DistilBERT (Distilled Bidirectional Encoder Representations from Transformers) architecture.
-This approach leverages the established capabilities of DistilBERT while allowing us to tailor the model to our specific task of distinguishing between human-written and machine-generated news articles in Korean.
+Instead, we intend to fine-tune an existing model based on the BERT (Bidirectional Encoder Representations from Transformers) architecture.
+This approach leverages the established capabilities of BERT while allowing us to tailor the model to our specific task of distinguishing between human-written and machine-generated news articles in Korean.
 
 \section{Contribution}
 \null\quad The sole main contributor to this project is Minseo Kim.
@@ -146,7 +146,7 @@ This was accomplished by sourcing publicly available Korean news online and subs
 This approach enabled us to compile a dataset with an equal representation of human-authored and machine-generated news.
 It also held the potential to create a dataset of adequate size to facilitate the training of a robust model. \\
 \null\quad Upon successful compilation of the dataset, we initiated the process of model development.
-Given the constraints on computational resources, we made the strategic decision to leverage a pre-existing DistilBERT model, rather than constructing a new one from scratch. \\
+Given the constraints on computational resources, we made the strategic decision to leverage a pre-existing BERT model, rather than constructing a new one from scratch. \\
 \null\quad Ultimately, an isolated segment of the dataset, earmarked specifically for testing purposes, was employed to gauge the performance of our fine-tuned model.
 For the sake of comparison, these tests were also conducted on baseline models using a similarly sized testing dataset,
 thereby allowing us to juxtapose the effectiveness of our model against existing frameworks.
@@ -162,8 +162,22 @@ Among the models subjected to testing were base LLaMA 2, beomi's Korean fine-tun
 Notably, due to limitations in our computational resources, we confined our experiments to the 7B and 13B models.
 We further explored the influence of various hyperparameters on the output, including temperature, top\_p, and repetition\_penalty.
 Our findings from these experiments indicated that the most optimal configuration for our specific needs comprised of the OpenChat 3.5 and GPT3.5 models, with a temperature setting of 0.7 and a top\_p value of 0.8. \\
-
-*experiment with other text classification base models later*
+\null\quad In the subsequent phase of our investigation, we assessed a multitude of foundational models renowned for their prowess in text classification, alongside an array of hyperparameters.
+The objective was to discern the most efficacious amalgamation that would yield superior model performance.
+Our empirical scrutiny was predominantly focused on two prominent models: BERT and DistilBERT, a distilled variant of BERT optimized for speed and efficiency.
+Our initial findings were intriguing; under the default parameter settings, DistilBERT demonstrated heightened performance.
+However, as we extended the training duration and delved into hyperparameter optimization, BERT began to exhibit a marginal yet consistent edge over DistilBERT.
+This phenomenon can be attributed to BERT's deeper and more complex architecture, which, despite requiring more computational resources and time,
+has the capacity to capture nuanced patterns in the data that simpler models like DistilBERT might overlook. \\
+\null\quad The concluding stage of our experimentation was characterized by the evaluation of diverse hyperparameters.
+Alterations to weight decay, learning rate, and the epsilon parameter within the Adam optimization algorithm did not yield any substantial performance gains.
+However, the introduction of a warmup step, constituting 10\% of the total training iterations, was instrumental in significantly elevating the performance benchmarks.
+This enhancement can be ascribed to the warmup step's role in facilitating a more gradual and controlled increase in the learning rate,
+which in turn aids the model in stabilizing its weights in the initial epochs, effectively preventing premature convergence to suboptimal minima. \\
+\null\quad Concurrently, we observed an uptick in the loss metric beyond a certain threshold in the training epochs, indicative of the model's stagnation or potential overfitting.
+To mitigate this, we instituted an early stopping protocol, which ceases training upon the cessation of improvement in the model's validation set performance.
+This strategy is fundamental in preserving the model's generalizability and forestalls the overlearning of training set peculiarities.
+Collectively, the calibration of the warmup steps and the implementation of early stopping have been pivotal in the refinement of our model, culminating in a more robust and generalized predictive performance.
 
 \section{Dataset}
 \null\quad As elucidated in the preceding sections, the dataset under consideration is constituted by an aggregation of news articles that are readily accessible to the public and originate from a variety of Korean news media outlets.
@@ -191,8 +205,7 @@ Our experiments were conducted utilizing the following computing resources:
 \end{itemize}
 
 Computer 1 was utilized for all stages of development, while Computer 2 was occasionally used to perform API calls to the OpenAI API during the dataset collection stage.
-
-\section{Experiment Setup}
+An additional computing device was used to write this report while the above were occupied.
 
 \section{Comparison with Baseline}
 
