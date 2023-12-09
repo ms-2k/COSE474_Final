@@ -581,3 +581,6 @@ data/
 
 #test models
 classifier/output
+
+#other test data/files
+tests/
